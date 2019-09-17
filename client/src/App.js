@@ -1,14 +1,12 @@
 import React from 'react';
-import SearchBar from 'components/search-bar';
-import MovieList from 'components/movie-list';
-import './styles/App.css';
+import SearchBar from './components/search-bar';
+import './App.css';
 
 const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <SearchBar />
-        <MovieList />
+        <SearchBar/>
       </header>
     </div>
   );
