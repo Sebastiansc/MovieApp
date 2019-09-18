@@ -4,7 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { Provider } from 'react-redux'
 
 import './index.css';
-import App from './App';
+import Header from './components/header';
 import MovieDetails from './components/movie-details';
 import PopularMovies from './components/popular-movies';
 import SearchResults from './components/search-results';
@@ -14,7 +14,7 @@ import configureStore from './store';
 const Routes = () => {
   return (
     <Fragment>
-      <Route path='/' component={App}/>
+      <Route path='/' component={Header}/>
       <Route exact path='/' component={PopularMovies}/>
       <Route path='/search/:movie' component={SearchResults}/>
       <Route path='/movie-details/:movieId' component={MovieDetails}/>
