@@ -13,8 +13,8 @@ const errorCallback = err => {
   res.redirect('/error');
 }
 
-app.post('/api/search', (req, res) => {
-  const movie = req.body.movie
+app.get('/api/search', (req, res) => {
+  const movie = req.query.movie
   fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${movie}`)
     .then(res => res.json())
     .then(data => {
@@ -23,7 +23,27 @@ app.post('/api/search', (req, res) => {
     .catch(errorCallback)
 });
 
-app.get('/api/popularMovies', (_, res) => {
+app.get('/api/movie-details', (req, res) => {
+  const movieId = req.query.movieId
+  fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`)
+    .then(res => res.json())
+    .then(data => {
+      res.json(data);
+    })
+    .catch(errorCallback)
+});
+
+app.get('/api/movie-recommendations', (req, res) => {
+  const movieId = req.query.movieId;
+  fetch(`https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${apiKey}`)
+    .then(res => res.json())
+    .then(data => {
+      res.json(data);
+    })
+    .catch(errorCallback);
+});
+
+app.get('/api/popular-movies', (_, res) => {
   fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`)
     .then(res => res.json())
     .then(data => {

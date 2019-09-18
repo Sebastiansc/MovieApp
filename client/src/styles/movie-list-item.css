@@ -1,0 +1,24 @@
+.MovieListItem {
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.MovieListItem-link {
+  width: 200px;
+  height: 113px;
+  display: inline-block;
+  text-decoration: none;
+  margin-right: 12px;
+}
+
+.MovieListItem-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 0;
+}
+
+.MovieListItem-rating {
+  text-align: center;
+  color: black;
+}
+

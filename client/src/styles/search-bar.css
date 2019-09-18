@@ -1,0 +1,19 @@
+.SearchBar span {
+ margin-right: 8px;   
+}
+
+.SearchBar input {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  width: 200px;
+}
+
+.SearchBar-link {
+  color: white;
+  margin-left: 5px;
+  font-size: 12px;
+  padding: 3px;
+  border-radius: 5px;
+  border: 1px solid white;
+}

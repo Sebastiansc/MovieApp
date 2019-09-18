@@ -1,15 +1,21 @@
 .App {
   text-align: center;
+  margin-bottom: 36px;
+}
+
+.App-homeLink {
+  color: white;
 }
 
 .App-header {
   font-size: 16px;
   background-color: #282c34;
   height: 36px;
+  padding: 0 12px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   color: white;
 }
 

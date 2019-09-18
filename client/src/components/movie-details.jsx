@@ -1,15 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const MovieDetails = (props) => {
+import MovieListItem from "./movie-list-item";
+import RecommendedMovies from "./recommended-movies";
+import "../styles/movie-details.css";
+
+const MovieDetails = ({ match: { params: { movieId } } }) => {
+  const [movie, setMovie] = useState(null);
+
+  useEffect(() => {
+    async function fetchInitialData() {
+      const response = await fetch(`/api/movie-details?movieId=${movieId}`);
+      const data = await response.json();
+      setMovie(data);
+    }
+
+    fetchInitialData();
+  }, [movieId]);
+
+  if (!movie) {
+    return null;
+  }
+
+  const { 
+    genres = [],
+    release_date: releaseDate,
+    revenue,
+    runtime
+  } = movie;
   return (
-    <li className="MovieDetails">
-      <span className="MovieDetails-title"></span>
-      <span className="MovieDetails-overview"></span>
-      <div className="MovieDetails-rating">
-        <span className="MovieDetails-rating-votes"></span>
-        <span className="MovieDetails-rating-score"></span>
+    <div className="MovieDetails">
+      <div className="MovieDetails-genres">
+        <span>Genres: </span>
+        {genres.map(({ name }) => <span key={name} className="MovieDetails-genre">{name}</span> )}
       </div>
-    </li>
+      <MovieListItem {...movie}/>
+      <div className="MovieDetails-bottomContent">
+        <p>Release date: {releaseDate}</p>
+        <p>Duration: {runtime} minutes</p>
+        <p>Movie grossed ${revenue}</p>
+      </div>
+      <RecommendedMovies movieId={movie.id}/>
+    </div>
   );
 }
 

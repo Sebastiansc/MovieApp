@@ -1,40 +1,44 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { updateMovies } from '../actions/movie-actions';
+import React, { useState, useEffect } from "react";
+import { Link, Redirect } from "react-router-dom";
 
-const handleEnter = async ({ e = {}, searchValue, setMovies }) => {
-  if (e.keyCode === 13 || e.type === "click") {
-    const response = await fetch("api/search", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ movie: searchValue })
-    })
-    const data = await response.json()
-    setMovies(data.results);
+import { usePrevious } from "../hooks";
+import "../styles/search-bar.css"
+
+const handleEnter = (e, setSubmitted) => {
+  if (e.keyCode === 13) {
+    setSubmitted(true);
   }
 }
 
-const SearchBar = ({ setMovies }) => {
+const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const previousSubmit = usePrevious(submitted);
+  
+  // Reset state after redirecting
+  useEffect(() => {
+    if (previousSubmit) {
+      setSubmitted(false);
+    }
+  }, [previousSubmit]);
+
+  if (submitted) {
+    return <Redirect to={`/search/${searchValue}`}/>
+  }
 
   return (
-    <div>
+    <div className="SearchBar">
+      <span>Search for movies</span>
       <input 
         onChange={event => setSearchValue(event.target.value)}
-        onKeyDown={e => handleEnter({ e, searchValue, setMovies })}
+        onKeyDown={e => handleEnter(e, setSubmitted)}
         type="text"
         placeholder="Search.."
         value={searchValue}
       />
-      <button onClick={e => handleEnter({ e, searchValue, setMovies })}>go</button>
+      <Link className="SearchBar-link" to={`/search/${searchValue}`}>GO</Link>
     </div>
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  setMovies: movies => dispatch(updateMovies(movies))
-});
-
-export default connect(null, mapDispatchToProps)(SearchBar);
+export default SearchBar;

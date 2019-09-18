@@ -6,15 +6,17 @@ import { Provider } from 'react-redux'
 import './index.css';
 import App from './App';
 import MovieDetails from './components/movie-details';
-import MovieList from './components/movie-list';
+import PopularMovies from './components/popular-movies';
+import SearchResults from './components/search-results';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store';
 
-const Root = () => {
+const Routes = () => {
   return (
     <Fragment>
       <Route path='/' component={App}/>
-      <Route exact path='/' component={MovieList}/>
+      <Route exact path='/' component={PopularMovies}/>
+      <Route path='/search/:movie' component={SearchResults}/>
       <Route path='/movie-details/:movieId' component={MovieDetails}/>
     </Fragment>
   );
@@ -23,7 +25,7 @@ const Root = () => {
 ReactDOM.render(
   <Provider store={configureStore()}>
     <BrowserRouter>
-      <Root/>
+      <Routes />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')

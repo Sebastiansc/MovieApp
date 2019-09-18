@@ -1,0 +1,23 @@
+.MovieDetails-genres {
+  margin-bottom: 12px;
+}
+
+.MovieDetails-genre {
+  padding: 0 5px;
+}
+
+.MovieDetails-genre:not(:last-child) {
+  border-right: 1px solid gray;
+}
+
+.RecommendedMovies {
+  border-radius: 10px;
+  margin-bottom: 18px;
+  -webkit-appearance: none;
+  font-size: 16px;
+  border: white;
+  background: black;
+  padding: 2px 10px;
+  color: white;
+  cursor: pointer;
+}

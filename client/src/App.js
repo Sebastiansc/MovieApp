@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBar from './components/search-bar';
+import { Link } from "react-router-dom";
 import './App.css';
 
 const App = () => {
@@ -7,6 +8,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <SearchBar/>
+        <Link className="App-homeLink" to="/">Home</Link>
       </header>
     </div>
   );
